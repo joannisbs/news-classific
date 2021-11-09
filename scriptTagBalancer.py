@@ -32,7 +32,7 @@ for i in range (102345):
   if text == 'Err:510':
     print('removendo')
     
-  elif valueRandom < formatTagValue.get(tag, 200):
+  elif True or valueRandom < formatTagValue.get(tag, 200):
   
     dictDataframe['tag'].append(tag)
     dictDataframe['text'].append(text)
@@ -47,7 +47,7 @@ for i in range (len(df.index)):
   else:
     dictValue[df.loc[i].iloc[0]] = 1;
   
-df.to_csv("data/shortCorpus2.csv", sep=';')
+df.to_csv("data/fullCorpus.csv", sep=';')
 
 for i in dictValue:
   if(dictValue[i] > 300):
