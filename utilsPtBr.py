@@ -22,7 +22,7 @@ class Utils():
     textFormated = text.lower()
     tokens = []
     for token in nltk.word_tokenize(textFormated):
-      tokens.append(token)
+      tokens.append(token.lower())
     tokens = [word for word in tokens if word not in stopwords and word not in ponctuation]
     return tokens
   
