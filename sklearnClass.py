@@ -16,7 +16,7 @@ from IPython.display import Image
 
 class SKLRandomForestClassifier:
   def fit(self, trainX, trainY):
-    self.__model_RF = RandomForestClassifier()
+    self.__model_RF = RandomForestClassifier(max_depth=10, max_features=100)
     self.__model_RF.fit(trainX, trainY)
     
   def test(self, testX, testY):
@@ -31,15 +31,15 @@ class SKLRandomForestClassifier:
     plot_confusion_matrix(self.__model_RF, testX, testY)  
     plt.show()
 
-  def getDecisionTree(self, vocabulary):
+  def getDecisionTree(self, vocabulary, name):
     estimator = self.__model_RF.estimators_[5]
-    export_graphviz(estimator, out_file='tree.dot',
+    export_graphviz(estimator, out_file=name + '.dot',
                 class_names = ['outros', 'decisao', 'sentença', 'audiencia'],
                 feature_names = list(vocabulary),
                 max_depth = 15,
                 rounded = True, proportion = False, 
                 precision = 2, filled = True)
-    call(['dot', '-Tpng', 'tree.dot', '-o', 'tree.png', '-Gdpi=600'])
+    call(['dot', '-Tpng', name + '.dot', '-o', name + '.png', '-Gdpi=600'])
 
     
 

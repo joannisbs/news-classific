@@ -16,9 +16,9 @@ formatTag = {
 }
 
 formatTagValue = {
-  "Publicação - Despacho / Decisão": 35,
-  "Publicação - Sentença": 35,
-  "Publicação - Audiência": 35,
+  "Publicação - Despacho / Decisão": 3,
+  "Publicação - Sentença": 8,
+  "Publicação - Audiência": 24,
 }
 
 
@@ -44,7 +44,7 @@ for i in range (102345):
     if text == 'Err:510':
       print('removendo')
       
-    elif valueRandom < formatTagValue.get(tag, 35):
+    elif valueRandom < formatTagValue.get(tag, 200):
     
       dictDataframe['tag'].append(tag)
       dictDataframe['text'].append(text)
@@ -58,7 +58,7 @@ for i in range (len(df.index)):
   else:
     dictValue[df.loc[i].iloc[0]] = 1;
   
-df.to_csv("data/halfCorpus.csv", sep=';')
+df.to_csv("data/shortCorpus3.csv", sep=';')
 
 for i in dictValue:
   if(dictValue[i] > 10):
