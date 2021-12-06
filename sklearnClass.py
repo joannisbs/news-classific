@@ -10,7 +10,9 @@ from sklearn.neighbors import KNeighborsClassifier
 
 from sklearn.metrics import classification_report, plot_confusion_matrix
 from mlxtend.plotting import plot_decision_regions
-
+from sklearn.tree import export_graphviz
+from subprocess import call
+from IPython.display import Image
 
 class SKLRandomForestClassifier:
   def fit(self, trainX, trainY):
@@ -28,8 +30,20 @@ class SKLRandomForestClassifier:
   def getConfusionMatrix(self, testX, testY):
     plot_confusion_matrix(self.__model_RF, testX, testY)  
     plt.show()
+
+  def getDecisionTree(self, vocabulary):
+    estimator = self.__model_RF.estimators_[5]
+    export_graphviz(estimator, out_file='tree.dot',
+                class_names = ['outros', 'decisao', 'sentença', 'audiencia'],
+                feature_names = list(vocabulary),
+                max_depth = 15,
+                rounded = True, proportion = False, 
+                precision = 2, filled = True)
+    call(['dot', '-Tpng', 'tree.dot', '-o', 'tree.png', '-Gdpi=600'])
+
     
-        
+
+
 class SKLLogisticRegression:
   def fit(self, trainX, trainY):
     self.__model_LogR = LogisticRegression()
